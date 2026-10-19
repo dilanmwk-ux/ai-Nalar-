@@ -853,7 +853,7 @@
             `;
 
             const payload = {
-                contents: [{ parts: [{ text: inputVal }] }],
+                contents: [{ role: "user", parts: [{ text: inputVal }] }],
                 systemInstruction: {
                     parts: [{ text: consolePrompts[currentMode].systemInstruction }]
                 }
