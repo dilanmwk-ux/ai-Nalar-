@@ -190,16 +190,6 @@
                 <a href="#filosofi" class="hover:text-nalar-gold transition-colors">Filosofi</a>
             </nav>
 
-            <!-- Action Buttons -->
-            <div class="flex items-center gap-2 sm:gap-4">
-                <div class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-medium text-emerald-300 rounded-full bg-emerald-400/10 border border-emerald-400/20 shrink-0" aria-label="Status online">
-                    <span class="relative flex h-2 w-2">
-                        <span class="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60 animate-ping"></span>
-                        <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-400"></span>
-                    </span>
-                    <span>Online</span>
-                </div>
-            </div>
         </div>
     </header>
 
@@ -252,8 +242,8 @@
                     <div class="text-[11px] sm:text-xs text-slate-400">Model Generatif Utama</div>
                 </div>
                 <div class="p-3 sm:p-4 rounded-xl glass-panel md:bg-transparent md:border-none">
-                    <div class="text-xl sm:text-2xl lg:text-3xl font-serif text-nalar-gold mb-1">Live Search</div>
-                    <div class="text-[11px] sm:text-xs text-slate-400">Grounding Google Search</div>
+                    <div class="text-xl sm:text-2xl lg:text-3xl font-serif text-nalar-gold mb-1">Multi-Turn</div>
+                    <div class="text-[11px] sm:text-xs text-slate-400">Konteks Percakapan Terjaga</div>
                 </div>
                 <div class="p-3 sm:p-4 rounded-xl glass-panel md:bg-transparent md:border-none">
                     <div class="text-xl sm:text-2xl lg:text-3xl font-serif text-cyan-400 mb-1">Real-Time</div>
@@ -289,13 +279,6 @@
                 </div>
 
                 <div class="flex flex-wrap items-center justify-between md:justify-end gap-2.5 sm:gap-4 w-full md:w-auto">
-                    <!-- Grounding Toggle -->
-                    <label class="inline-flex items-center cursor-pointer text-xs font-mono text-slate-300 gap-2 select-none">
-                        <input type="checkbox" id="console-grounding" class="sr-only peer">
-                        <div class="relative w-8 h-4 sm:w-9 sm:h-5 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-3.5 after:w-3.5 sm:after:h-4 sm:after:w-4 after:transition-all peer-checked:bg-nalar-gold"></div>
-                        <span class="text-[10px] sm:text-[11px] text-slate-400 peer-checked:text-nalar-gold font-medium">Google Grounding</span>
-                    </label>
-                    
                     <!-- Tool Selector Tabs -->
                     <div class="flex bg-slate-900/90 p-1 rounded-lg border border-white/10 text-[11px] sm:text-xs font-medium w-full sm:w-auto justify-between sm:justify-start">
                         <button id="btn-analisis" onclick="setConsoleMode('analisis')" class="flex-1 sm:flex-none px-2.5 py-1.5 rounded-md transition-all text-slate-200 bg-nalar-gold/20 border border-nalar-gold/40 text-center">Sintesis Teks</button>
@@ -348,12 +331,6 @@
                     <!-- Dynamic Output Window -->
                     <div id="console-output" class="my-4 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans overflow-y-auto max-h-[260px] space-y-3">
                         <p class="text-slate-500 italic text-xs sm:text-sm">Output sintesis Gemini akan muncul di sini. Silakan masukkan perintah di panel sebelah kiri atau gunakan preset yang tersedia.</p>
-                    </div>
-
-                    <!-- Grounding Sources Container -->
-                    <div id="console-sources" class="hidden my-2 p-2.5 rounded-lg bg-black/40 border border-white/5 text-xs text-slate-400 space-y-1">
-                        <div class="font-mono text-[10px] text-nalar-gold uppercase tracking-wider">Sumber Grounding Google:</div>
-                        <ul id="console-sources-list" class="list-disc list-inside space-y-1 text-[11px] text-cyan-300"></ul>
                     </div>
 
                     <!-- Footer Metadata -->
@@ -572,12 +549,6 @@
                 </div>
 
                 <div class="flex items-center gap-2 sm:gap-3 shrink-0">
-                    <label class="hidden xs:inline-flex items-center cursor-pointer text-xs font-mono text-slate-300 gap-1.5 select-none">
-                        <input type="checkbox" id="chat-grounding" class="sr-only peer">
-                        <div class="relative w-7 h-3.5 sm:w-8 sm:h-4 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1px] after:left-[1px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-3 after:w-3 sm:after:h-3.5 sm:after:w-3.5 after:transition-all peer-checked:bg-cyan-500"></div>
-                        <span class="text-[9px] sm:text-[10px] text-slate-400 peer-checked:text-cyan-400">Search</span>
-                    </label>
-
                     <button onclick="closeChatModal()" class="text-slate-400 hover:text-white p-1.5 rounded-lg transition-colors">
                         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -619,38 +590,41 @@
     <script>
         // Chat History state for multi-turn Gemini conversation
         let chatHistory = [];
+        const CHAT_SYSTEM_PROMPT = "Anda adalah Nalar AI, asisten kecerdasan sintetis tingkat tinggi yang berfokus pada kedalaman logika, objektivitas, analisis berstruktur tajam, dan bebas dari klise/filler (anti-AI slop). Tanggapi dalam bahasa Indonesia yang elegan dan presisi.";
 
         // Helper function: proxy to Ikyy Gemini endpoint through our Vercel API.
         // A per-browser session ID lets the upstream API keep conversation context.
-        function getNalarSessionId() {
+        const memorySessions = {};
+        function getNalarSessionId(scope = 'chat') {
+            if (scope.startsWith('console-')) return 'nalar-' + scope; // sekali pakai, tidak disimpan
+            const key = 'nalar_ai_session_' + scope;
+            const make = () => 'nalar-' + scope + '-' + (globalThis.crypto?.randomUUID?.() || (Date.now() + '-' + Math.random().toString(36).slice(2)));
             try {
-                let id = localStorage.getItem('nalar_ai_session_id');
-                if (!id) {
-                    id = 'nalar-' + (globalThis.crypto?.randomUUID?.() || (Date.now() + '-' + Math.random().toString(36).slice(2)));
-                    localStorage.setItem('nalar_ai_session_id', id);
-                }
+                let id = localStorage.getItem(key);
+                if (!id) { id = make(); localStorage.setItem(key, id); }
                 return id;
-            } catch (_) { return 'nalar-session'; }
+            } catch (_) {
+                return memorySessions[scope] || (memorySessions[scope] = make());
+            }
         }
 
-        async function fetchGeminiWithBackoff(payload, retries = 3, delay = 1000) {
-            const lastUserMessage = [...(payload.contents || [])].reverse().find(item => item?.role === 'user');
-            const text = (lastUserMessage?.parts || []).map(part => part?.text || '').join('\n').trim();
-            if (!text) throw new Error('Teks prompt tidak boleh kosong.');
+        async function fetchGeminiWithBackoff(text, scope = 'chat', retries = 3, delay = 1000) {
+            if (!text || !text.trim()) throw new Error('Teks prompt tidak boleh kosong.');
 
             for (let i = 0; i < retries; i++) {
+                let retryable = true;
                 try {
                     const response = await fetch('/api/chat', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ text, sessionsId: getNalarSessionId() })
+                        body: JSON.stringify({ text, sessionsId: getNalarSessionId(scope) })
                     });
                     const data = await response.json().catch(() => ({}));
                     if (response.ok) return data;
-                    const message = data.error || `HTTP ${response.status}`;
-                    if (response.status < 500 || i === retries - 1) throw new Error(message);
+                    retryable = response.status >= 500;
+                    throw new Error(data.error || `HTTP ${response.status}`);
                 } catch (e) {
-                    if (i === retries - 1) throw e;
+                    if (!retryable || i === retries - 1) throw e;
                 }
                 await new Promise(res => setTimeout(res, delay * Math.pow(2, i)));
             }
@@ -678,7 +652,6 @@
             const inputEl = document.getElementById('chat-input');
             const messagesContainer = document.getElementById('chat-messages');
             const sendBtn = document.getElementById('chat-send-btn');
-            const groundingChecked = document.getElementById('chat-grounding')?.checked;
             const query = inputEl.value.trim();
 
             if (!query) return;
@@ -712,22 +685,13 @@
 
             sendBtn.disabled = true;
 
-            // Build payload with prompt history
+            // Instruksi sistem hanya dikirim di pesan pertama; konteks selanjutnya dijaga oleh session ID
+            const isFirstTurn = chatHistory.length === 0;
             chatHistory.push({ role: 'user', parts: [{ text: query }] });
-
-            const payload = {
-                contents: chatHistory,
-                systemInstruction: {
-                    parts: [{ text: "Anda adalah Nalar AI, asisten kecerdasan sintetis tingkat tinggi yang berfokus pada kedalaman logika, objektivitas, analisis berstruktur tajam, dan bebas dari klise/filler (anti-AI slop). Tanggapi dalam bahasa Indonesia yang elegan dan presisi." }]
-                }
-            };
-
-            if (groundingChecked) {
-                payload.tools = [{ "google_search": {} }];
-            }
+            const promptText = isFirstTurn ? CHAT_SYSTEM_PROMPT + '\n\nPertanyaan pengguna: ' + query : query;
 
             try {
-                const result = await fetchGeminiWithBackoff(payload);
+                const result = await fetchGeminiWithBackoff(promptText, 'chat');
                 document.getElementById(loadingId)?.remove();
 
                 const candidate = result.candidates?.[0];
@@ -735,25 +699,7 @@
                     const aiText = candidate.content.parts[0].text;
                     
                     // Update chat history
-                    chatHistory.push(candidate.content);
-
-                    // Extract search sources if present
-                    let sourcesHtml = '';
-                    const groundingMetadata = candidate.groundingMetadata;
-                    if (groundingMetadata && groundingMetadata.groundingAttributions) {
-                        const sources = groundingMetadata.groundingAttributions
-                            .map(attr => ({ uri: attr.web?.uri, title: attr.web?.title }))
-                            .filter(s => s.uri && s.title);
-
-                        if (sources.length > 0) {
-                            sourcesHtml = `
-                                <div class="mt-3 pt-3 border-t border-white/10 text-[11px] text-cyan-300 space-y-1">
-                                    <div class="font-mono text-slate-400 text-[10px] uppercase">Sumber Grounding:</div>
-                                    ${sources.map(s => `<a href="${s.uri}" target="_blank" rel="noopener" class="block hover:underline truncate">🔗 ${escapeHtml(s.title)}</a>`).join('')}
-                                </div>
-                            `;
-                        }
-                    }
+                    chatHistory.push({ role: 'model', parts: [{ text: aiText }] });
 
                     messagesContainer.innerHTML += `
                         <div class="flex gap-2.5 sm:gap-3 max-w-[90%] sm:max-w-[85%]">
@@ -762,7 +708,6 @@
                             </div>
                             <div class="glass-card p-3.5 sm:p-4 rounded-2xl rounded-tl-none border-white/10 text-slate-200 leading-relaxed font-sans">
                                 ${formatMarkdownText(aiText)}
-                                ${sourcesHtml}
                             </div>
                         </div>
                     `;
@@ -770,6 +715,7 @@
                     throw new Error("Format respon tidak valid");
                 }
             } catch (err) {
+                chatHistory.pop(); // buang pesan user yang gagal agar giliran pertama tetap membawa instruksi sistem
                 document.getElementById(loadingId)?.remove();
                 messagesContainer.innerHTML += `
                     <div class="flex gap-2.5 sm:gap-3 max-w-[90%] sm:max-w-[85%]">
@@ -831,15 +777,10 @@
             const statusText = document.getElementById('status-text');
             const statusDot = document.getElementById('status-dot');
             const runBtn = document.getElementById('console-run-btn');
-            const groundingChecked = document.getElementById('console-grounding')?.checked;
-            const sourcesContainer = document.getElementById('console-sources');
-            const sourcesList = document.getElementById('console-sources-list');
 
             if (!inputVal) return;
 
             runBtn.disabled = true;
-            sourcesContainer.classList.add('hidden');
-            sourcesList.innerHTML = '';
 
             statusText.innerText = "MEMPROSES SINTESIS LOGIKA VIA I KYY GEMINI API...";
             statusText.className = "text-[10px] sm:text-xs font-mono text-nalar-gold animate-pulse truncate";
@@ -852,36 +793,17 @@
                 </div>
             `;
 
-            const payload = {
-                contents: [{ role: "user", parts: [{ text: inputVal }] }],
-                systemInstruction: {
-                    parts: [{ text: consolePrompts[currentMode].systemInstruction }]
-                }
-            };
-
-            if (groundingChecked) {
-                payload.tools = [{ "google_search": {} }];
-            }
+            // Tiap eksekusi konsol berdiri sendiri: instruksi mode digabung ke prompt, session ID baru
+            const promptText = consolePrompts[currentMode].systemInstruction + '\n\nInput pengguna:\n' + inputVal;
+            const consoleSession = 'console-' + currentMode + '-' + Date.now();
 
             try {
-                const result = await fetchGeminiWithBackoff(payload);
+                const result = await fetchGeminiWithBackoff(promptText, consoleSession);
                 const candidate = result.candidates?.[0];
 
                 if (candidate && candidate.content?.parts?.[0]?.text) {
                     const responseText = candidate.content.parts[0].text;
-                    outputBox.innerHTML = formatMarkdownText(responseText);
-
-                    const groundingMetadata = candidate.groundingMetadata;
-                    if (groundingMetadata && groundingMetadata.groundingAttributions) {
-                        const sources = groundingMetadata.groundingAttributions
-                            .map(a => ({ uri: a.web?.uri, title: a.web?.title }))
-                            .filter(s => s.uri && s.title);
-
-                        if (sources.length > 0) {
-                            sourcesList.innerHTML = sources.map(s => `<li><a href="${s.uri}" target="_blank" rel="noopener" class="hover:underline">${escapeHtml(s.title)}</a></li>`).join('');
-                            sourcesContainer.classList.remove('hidden');
-                        }
-                    }
+                    outputBox.innerHTML = currentMode === 'visual' ? renderSvgOrText(responseText) : formatMarkdownText(responseText);
 
                     statusText.innerText = "SINTESIS GEMINI SELESAI - STATUS: OPTIMUM";
                     statusText.className = "text-[10px] sm:text-xs font-mono text-emerald-400 truncate";
@@ -908,11 +830,72 @@
                 .replace(/'/g, "&#039;");
         }
 
+        function inlineMarkdown(escaped) {
+            return escaped
+                .replace(/`([^`\n]+)`/g, '<code class="px-1 py-0.5 rounded bg-black/40 text-nalar-gold font-mono text-[0.9em]">$1</code>')
+                .replace(/\*\*(.+?)\*\*/g, '<strong class="text-white">$1</strong>')
+                .replace(/(^|[^*])\*(?!\s)([^*\n]+?)\*(?!\*)/g, '$1<em>$2</em>');
+        }
+
         function formatMarkdownText(text) {
-            let formatted = escapeHtml(text);
-            formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            formatted = formatted.replace(/\n/g, '<br/>');
-            return formatted;
+            const lines = String(text).replace(/\r/g, '').split('\n');
+            let html = '', inCode = false, codeBuf = [], listType = null;
+            const closeList = () => { if (listType) { html += `</${listType}>`; listType = null; } };
+
+            for (const raw of lines) {
+                if (raw.trim().startsWith('```')) {
+                    if (inCode) {
+                        html += `<pre class="my-2 p-3 rounded-lg bg-black/50 border border-white/10 overflow-x-auto text-[11px] sm:text-xs font-mono text-slate-200"><code>${escapeHtml(codeBuf.join('\n'))}</code></pre>`;
+                        codeBuf = []; inCode = false;
+                    } else { closeList(); inCode = true; }
+                    continue;
+                }
+                if (inCode) { codeBuf.push(raw); continue; }
+
+                const line = escapeHtml(raw);
+                let m;
+                if ((m = line.match(/^\s*#{1,6}\s+(.*)$/))) {
+                    closeList();
+                    html += `<div class="mt-3 mb-1 font-semibold text-white">${inlineMarkdown(m[1])}</div>`;
+                } else if ((m = line.match(/^\s*[-*•]\s+(.*)$/))) {
+                    if (listType !== 'ul') { closeList(); html += '<ul class="list-disc pl-5 space-y-1 my-1">'; listType = 'ul'; }
+                    html += `<li>${inlineMarkdown(m[1])}</li>`;
+                } else if ((m = line.match(/^\s*\d+[.)]\s+(.*)$/))) {
+                    if (listType !== 'ol') { closeList(); html += '<ol class="list-decimal pl-5 space-y-1 my-1">'; listType = 'ol'; }
+                    html += `<li>${inlineMarkdown(m[1])}</li>`;
+                } else if (line.trim() === '') {
+                    closeList();
+                    html += '<div class="h-2"></div>';
+                } else {
+                    closeList();
+                    html += `<div>${inlineMarkdown(line)}</div>`;
+                }
+            }
+            if (inCode) html += `<pre class="my-2 p-3 rounded-lg bg-black/50 border border-white/10 overflow-x-auto text-xs font-mono"><code>${escapeHtml(codeBuf.join('\n'))}</code></pre>`;
+            closeList();
+            return html;
+        }
+
+        // Mode "Vektor SVG": tampilkan gambar SVG-nya (lewat <img> data-URI, jadi skrip tidak bisa berjalan) + kodenya
+        function renderSvgOrText(text) {
+            const match = String(text).match(/<svg[\s\S]*?<\/svg>/i);
+            if (!match) return formatMarkdownText(text);
+            let svg = match[0]
+                .replace(/<script[\s\S]*?<\/script>/gi, '')
+                .replace(/<foreignObject[\s\S]*?<\/foreignObject>/gi, '')
+                .replace(/\son\w+\s*=\s*("[^"]*"|'[^']*')/gi, '');
+            if (!/xmlns=/.test(svg)) svg = svg.replace(/<svg/i, '<svg xmlns="http://www.w3.org/2000/svg"');
+            const dataUri = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+            const description = String(text).replace(/```(?:svg|xml|html)?[\s\S]*?```/gi, '').replace(match[0], '').trim();
+            return `
+                <div class="flex justify-center p-3 rounded-lg bg-black/40 border border-white/10">
+                    <img src="${dataUri}" alt="Hasil vektor SVG" class="max-w-full max-h-56" />
+                </div>
+                ${description ? `<div class="mt-2">${formatMarkdownText(description)}</div>` : ''}
+                <details class="mt-2 text-xs text-slate-400">
+                    <summary class="cursor-pointer hover:text-nalar-gold">Lihat kode SVG</summary>
+                    <pre class="mt-2 p-3 rounded-lg bg-black/50 border border-white/10 overflow-x-auto font-mono text-[11px]"><code>${escapeHtml(svg)}</code></pre>
+                </details>`;
         }
 
         window.onload = function() {
