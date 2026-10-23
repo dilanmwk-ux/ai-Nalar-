@@ -1,906 +1,355 @@
 <!DOCTYPE html>
-<html lang="id" class="dark scroll-smooth">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Nalar AI — Inteligensia Generatif Tingkat Lanjut</title>
-
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        nalar: {
-                            bg: '#0A0B0E',
-                            card: 'rgba(18, 20, 29, 0.65)',
-                            gold: '#D4AF37',
-                            'gold-light': '#F3E5AB',
-                            cyan: '#00E5FF',
-                            'cyan-glow': '#00B4D8',
-                            border: 'rgba(212, 175, 55, 0.15)',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif']
-                    },
-                    boxShadow: {
-                        'gold-glow': '0 0 25px -5px rgba(212, 175, 55, 0.3)',
-                        'cyan-glow': '0 0 25px -5px rgba(0, 229, 255, 0.3)',
-                    },
-                    screens: {
-                        'xs': '400px',
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    
-    <style>
-        html, body {
-            background-color: #0A0B0E;
-            color: #E2E8F0;
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            width: 100%;
-        }
-
-        /* Responsive Glassmorphism Cards */
-        .glass-panel {
-            background: rgba(18, 20, 28, 0.65);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .glass-card {
-            background: rgba(22, 25, 36, 0.55);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(212, 175, 55, 0.14);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .glass-card:hover {
-            border-color: rgba(212, 175, 55, 0.4);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5), 0 0 20px -5px rgba(212, 175, 55, 0.18);
-        }
-
-        .gold-gradient-text {
-            background: linear-gradient(135deg, #FFF 0%, #F3E5AB 50%, #D4AF37 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .cyan-gradient-text {
-            background: linear-gradient(135deg, #E0F7FA 0%, #00E5FF 60%, #00838F 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Ambient Glow Spheres - Scaled for screens */
-        .glow-sphere-1 {
-            position: absolute;
-            width: min(500px, 90vw);
-            height: min(500px, 90vw);
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, rgba(0,0,0,0) 70%);
-            top: -100px;
-            left: 5%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .glow-sphere-2 {
-            position: absolute;
-            width: min(600px, 90vw);
-            height: min(600px, 90vw);
-            background: radial-gradient(circle, rgba(0, 229, 255, 0.08) 0%, rgba(0,0,0,0) 70%);
-            top: 200px;
-            right: -5%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* Background grid */
-        .bg-grid {
-            background-size: 40px 40px;
-            background-image: 
-                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-        }
-
-        @media (min-width: 768px) {
-            .bg-grid {
-                background-size: 60px 60px;
-            }
-        }
-
-        /* Custom scrollbars */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0A0B0E;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #1E2330;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #D4AF37;
-        }
-
-        /* Pulse animation */
-        @keyframes subtlePulse {
-            0%, 100% { opacity: 0.8; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.03); }
-        }
-        .animate-subtle {
-            animation: subtlePulse 4s infinite ease-in-out;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nalar AI — Asisten penalaran berbahasa Indonesia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&family=Shantell+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#E6EBE4;--card:#F6F8F3;--ink:#12203A;--mute:#55627A;--hl:#F2E35B;--red:#D7263D}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);background-image:linear-gradient(rgba(18,32,58,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(18,32,58,.06) 1px,transparent 1px);background-size:28px 28px;color:var(--ink);font:400 16px/1.6 'Schibsted Grotesk',system-ui,sans-serif;overflow-x:hidden}
+.wrap{max-width:1120px;margin:auto;padding:0 20px}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+header{border-bottom:1.5px solid var(--ink);background:var(--paper)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.25rem;letter-spacing:-.02em;text-decoration:none}
+nav{display:flex;gap:26px;font-weight:500;font-size:.95rem}
+nav a{text-decoration:none;padding:4px 0;border-bottom:2px solid transparent}
+nav a:hover{border-color:var(--red)}
+.btn{font:inherit;font-weight:700;font-size:.95rem;padding:12px 20px;border:1.5px solid var(--ink);border-radius:4px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--ink);color:var(--paper);transition:background .15s,color .15s}
+.btn:hover{background:var(--hl);color:var(--ink)}
+.btn.alt{background:transparent;color:var(--ink)}
+.btn.alt:hover{background:var(--card)}
+.btn:disabled{opacity:.5;cursor:wait}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding-block:72px 88px}
+h1{font-weight:800;font-size:clamp(2.2rem,5.2vw,4rem);line-height:1.04;letter-spacing:-.035em;margin-bottom:22px}
+.lead{font-size:1.15rem;color:var(--mute);max-width:46ch;margin-bottom:30px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.sheet{background:var(--card);border:1.5px solid var(--ink);border-radius:14px;padding:28px 26px 24px}
+.sheet small{display:block;color:var(--mute);font-size:.85rem;margin-bottom:10px}
+.claim{font-size:1.4rem;line-height:1.55;font-weight:500;margin-bottom:22px}
+.hl{background:linear-gradient(var(--hl),var(--hl)) no-repeat 0 88%/0 .85em;animation:draw .9s .5s forwards}
+@keyframes draw{to{background-size:100% .85em}}
+.wavy{text-decoration:underline wavy var(--red) 2px;text-underline-offset:6px}
+.note{display:flex;gap:10px;align-items:flex-start;font-family:'Shantell Sans',cursive;font-size:.92rem;line-height:1.45;margin-top:14px}
+.note svg{flex:none;width:34px;height:30px}
+.note.r{color:var(--red)}
+section{padding-block:72px}main{padding-bottom:72px}
+h2{font-weight:800;font-size:clamp(1.7rem,3.4vw,2.5rem);letter-spacing:-.03em;line-height:1.1;margin-bottom:12px}
+.sub{color:var(--mute);max-width:56ch;margin-bottom:32px}
+.console{background:var(--card);border:1.5px solid var(--ink);border-radius:14px;overflow:hidden}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1.5px solid var(--ink);background:var(--paper)}
+.bar b{font-weight:700}
+.bar span{color:var(--mute);font-size:.85rem}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{font:inherit;font-weight:500;font-size:.9rem;padding:6px 14px;border:1.5px solid var(--ink);border-radius:999px;background:transparent;color:var(--ink);cursor:pointer}
+.tab.on{background:var(--ink);color:var(--paper)}
+.body{display:grid;grid-template-columns:5fr 7fr;min-height:400px}
+.pane{padding:20px;display:flex;flex-direction:column;gap:14px}
+.pane+.pane{border-left:1.5px solid var(--ink)}
+label{font-weight:700;font-size:.95rem}
+textarea,#chat-input{font:inherit;color:var(--ink);width:100%;border:1.5px solid var(--ink);border-radius:8px;background:#fff;padding:10px 14px}
+textarea{height:196px;resize:none;font-size:.95rem;line-height:28px;padding-top:0;background:repeating-linear-gradient(#fff 0 27px,rgba(18,32,58,.14) 27px 28px);background-attachment:local}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:inherit;font-size:.85rem;padding:5px 12px;border:1.5px dashed var(--ink);border-radius:999px;background:transparent;cursor:pointer}
+.chip:hover{background:var(--hl);border-style:solid}
+.status{display:flex;align-items:center;gap:8px;font-size:.85rem;font-weight:500;padding-bottom:12px;border-bottom:1.5px solid var(--ink)}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--mute);flex:none}
+[data-s=busy] .dot,.dot[data-s=busy]{background:var(--hl);outline:1.5px solid var(--ink)}
+.dot[data-s=ok]{background:#2E8B57}.dot[data-s=err]{background:var(--red)}
+#status-text[data-s=err]{color:var(--red)}
+#console-output{flex:1;overflow-y:auto;max-height:290px;font-size:.95rem;line-height:1.65;display:flex;flex-direction:column;gap:4px}
+#console-output .empty{color:var(--mute)}
+#console-output pre,.bub pre{margin:6px 0;padding:10px 12px;border-radius:8px;border:1.5px solid var(--ink);background:#fff;overflow-x:auto;font-size:.8rem}
+code{font-family:ui-monospace,Menlo,monospace;background:var(--hl);padding:0 4px;border-radius:3px;font-size:.88em}
+pre code{background:none;padding:0}
+.svgbox{display:flex;justify-content:center;padding:12px;border:1.5px solid var(--ink);border-radius:8px;background:#fff}
+.svgbox img{max-width:100%;max-height:220px}
+details{font-size:.85rem;color:var(--mute);margin-top:8px}summary{cursor:pointer}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;margin-top:36px}
+.step{position:relative}
+.step svg{width:64px;height:64px;display:block;margin-bottom:16px}
+.step:not(:last-child)::after{content:"";position:absolute;top:32px;left:80px;right:-28px;border-top:2px dashed var(--ink)}
+.step h3{font-size:1.15rem;margin-bottom:6px;letter-spacing:-.01em}
+.step p{color:var(--mute);font-size:.95rem}
+blockquote{border-left:6px solid var(--ink);padding:4px 0 4px 28px;font-size:clamp(1.3rem,2.8vw,2rem);line-height:1.35;font-weight:500;letter-spacing:-.02em;max-width:30em}
+.src{margin:16px 0 0 34px;color:var(--mute);font-size:.9rem}
+.fab{position:fixed;right:20px;bottom:20px;z-index:40;box-shadow:0 0 0 4px var(--paper)}
+.modal{position:fixed;inset:0;background:rgba(18,32,58,.6);display:none;align-items:center;justify-content:center;padding:12px;z-index:50}
+.modal.open{display:flex}
+.dialog{background:var(--card);border:1.5px solid var(--ink);border-radius:14px;width:100%;max-width:720px;height:min(88vh,720px);display:flex;flex-direction:column;overflow:hidden}
+.dialog .bar b{font-size:.95rem}
+.x{font:inherit;font-size:1.4rem;line-height:1;background:none;border:0;cursor:pointer;padding:2px 8px;color:var(--ink)}
+#chat-messages{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:14px;font-size:.95rem}
+.msg{display:flex;gap:10px;max-width:90%}
+.msg.user{margin-left:auto;flex-direction:row-reverse}
+.av{flex:none;width:30px;height:30px;border-radius:6px;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-weight:800;font-size:.85rem}
+.av.err{background:var(--red)}
+.bub{padding:10px 14px;border:1.5px solid var(--ink);border-radius:4px 14px 14px 14px;background:#fff;min-width:0}
+.user .bub{background:var(--hl);border-radius:14px 4px 14px 14px}
+.bub.err{border-color:var(--red);color:var(--red)}
+#chat-form{display:flex;gap:8px;padding:14px;border-top:1.5px solid var(--ink);background:var(--paper)}
+.spin{animation:sp 1s linear infinite;vertical-align:-3px;margin-right:6px}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media(max-width:860px){.hero{grid-template-columns:1fr;gap:40px;padding-block:48px 56px}.body{grid-template-columns:1fr}.pane+.pane{border-left:0;border-top:1.5px solid var(--ink)}.steps{grid-template-columns:1fr;gap:28px}.step:not(:last-child)::after{display:none}nav{display:none}section{padding-block:52px}}
+@media(prefers-reduced-motion:reduce){.hl{animation:none;background-size:100% .85em}.spin{animation:none}html{scroll-behavior:auto}}
+</style>
 </head>
-<body class="bg-nalar-bg relative bg-grid min-h-screen text-slate-200 selection:bg-nalar-gold/30 selection:text-white w-full overflow-x-hidden">
+<body>
+<header><div class="wrap">
+  <a href="#" class="brand">
+    <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="#12203A" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+      <rect x="2" y="2" width="30" height="30" rx="7" fill="#F2E35B"/>
+      <path d="M10 24V10l14 14V10"/><circle cx="10" cy="10" r="2.2" fill="#12203A"/><circle cx="24" cy="24" r="2.2" fill="#12203A"/>
+    </svg>Nalar AI
+  </a>
+  <nav><a href="#demo">Konsol</a><a href="#cara">Cara kerja</a><a href="#filosofi">Prinsip</a></nav>
+</div></header>
 
-    <div class="glow-sphere-1"></div>
-    <div class="glow-sphere-2"></div>
-
-    <!-- Navigation Header -->
-    <header class="sticky top-0 z-50 glass-panel border-b border-white/5 px-4 sm:px-6 lg:px-12 py-3.5">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            
-            <!-- Brand Logo -->
-            <a href="#" class="flex items-center gap-2.5 sm:gap-3 group shrink-0">
-                <div class="relative w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center bg-gradient-to-br from-amber-500/20 to-cyan-500/20 rounded-xl border border-nalar-gold/30 group-hover:border-nalar-gold transition-colors">
-                    <!-- SVG Logo Icon -->
-                    <svg class="w-5 h-5 sm:w-6 sm:h-6 text-nalar-gold transition-transform duration-500 group-hover:rotate-12" viewBox="0 0 36 36" fill="none">
-                        <path d="M18 4L30 11V25L18 32L6 25V11L18 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                        <circle cx="18" cy="18" r="4" fill="url(#goldCyan)" />
-                        <path d="M18 10V14M18 22V26M11 14L14 16M22 20L25 22M11 22L14 20M22 16L25 14" stroke="#00E5FF" stroke-width="1.5" stroke-linecap="round"/>
-                        <defs>
-                            <linearGradient id="goldCyan" x1="14" y1="14" x2="22" y2="22" gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#D4AF37"/>
-                                <stop offset="1" stop-color="#00E5FF"/>
-                            </linearGradient>
-                        </defs>
-                    </svg>
-                </div>
-                <div class="flex flex-col">
-                    <span class="text-lg sm:text-xl font-bold tracking-tight text-white flex items-center gap-1">
-                        NALAR <span class="text-[10px] sm:text-xs px-1.5 py-0.5 rounded bg-nalar-gold/10 border border-nalar-gold/30 text-nalar-gold font-mono font-normal">AI</span>
-                    </span>
-                    <span class="text-[9px] sm:text-[10px] tracking-widest uppercase text-slate-400 font-sans">Sintesis Pemikiran</span>
-                </div>
-            </a>
-
-            <!-- Desktop Navigation Links -->
-            <nav class="hidden md:flex items-center space-x-6 lg:space-x-8 text-sm text-slate-300 font-medium">
-                <a href="#fitur" class="hover:text-nalar-gold transition-colors">Arsitektur</a>
-                <a href="#demo" class="hover:text-nalar-gold transition-colors">Konsol Nalar</a>
-                <a href="#kapabilitas" class="hover:text-nalar-gold transition-colors">Kapabilitas</a>
-                <a href="#filosofi" class="hover:text-nalar-gold transition-colors">Filosofi</a>
-            </nav>
-
-        </div>
-    </header>
-
-    <section class="relative pt-8 sm:pt-16 pb-16 sm:pb-28 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto">
-        <div class="text-center max-w-4xl mx-auto relative z-10">
-            
-            <!-- Badge Sub-header -->
-            <div class="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full glass-panel border border-nalar-gold/20 mb-6 sm:mb-8 animate-subtle max-w-full overflow-hidden">
-                <svg class="w-4 h-4 sm:w-5 sm:h-5 shrink-0" viewBox="0 0 24 24" fill="none">
-                    <circle cx="12" cy="12" r="10" stroke="#00E5FF" stroke-width="1.5" stroke-dasharray="2 2"/>
-                    <path d="M12 6V12L15.5 15.5" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round"/>
-                    <circle cx="12" cy="12" r="2" fill="#00E5FF"/>
-                </svg>
-                <span class="text-[10px] sm:text-xs uppercase tracking-wider sm:tracking-widest text-slate-300 font-semibold truncate">Nalar Engine v3.0 (Powered by Gemini)</span>
-                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping shrink-0"></span>
-            </div>
-
-            <!-- Main Headline -->
-            <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-normal text-white leading-tight sm:leading-tight mb-6 sm:mb-8 px-2">
-                Kecerdasan Artifisial dengan <br class="hidden sm:inline"/>
-                <span class="gold-gradient-text italic font-serif">Kedalaman Logika</span> &amp; <span class="cyan-gradient-text">Intuisi</span>
-            </h1>
-
-            <!-- Subheadline -->
-            <p class="text-sm sm:text-lg md:text-xl text-slate-400 font-light max-w-2xl mx-auto leading-relaxed sm:leading-relaxed mb-8 sm:mb-10 px-2">
-                Menghubungkan sintesis data kompleks dengan pertimbangan rasional tinggi. Nalar AI melampaui statistik generik dengan engine Gemini 3 Flash.
-            </p>
-
-            <!-- CTA Buttons -->
-            <div class="flex flex-col xs:flex-row items-center justify-center gap-3 sm:gap-4 mb-12 sm:mb-16 w-full max-w-md mx-auto sm:max-w-none">
-                <button onclick="openChatModal()" class="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-gradient-to-r from-amber-200 via-nalar-gold to-amber-500 text-slate-950 font-semibold text-sm sm:text-base hover:shadow-gold-glow hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2.5">
-                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-slate-950" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/>
-                    </svg>
-                    <span>Mulai Chat Sekarang</span>
-                </button>
-                
-                <a href="#demo" class="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl glass-panel border border-white/10 hover:border-nalar-gold/40 text-slate-200 font-medium text-sm sm:text-base hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2">
-                    <span>Coba Konsol Nalar</span>
-                    <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                    </svg>
-                </a>
-            </div>
-
-            <!-- Responsive Key Metric Counters -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pt-6 sm:pt-8 border-t border-white/5 text-left">
-                <div class="p-3 sm:p-4 rounded-xl glass-panel md:bg-transparent md:border-none">
-                    <div class="text-xl sm:text-2xl lg:text-3xl font-serif text-white mb-1">Gemini 3</div>
-                    <div class="text-[11px] sm:text-xs text-slate-400">Model Generatif Utama</div>
-                </div>
-                <div class="p-3 sm:p-4 rounded-xl glass-panel md:bg-transparent md:border-none">
-                    <div class="text-xl sm:text-2xl lg:text-3xl font-serif text-nalar-gold mb-1">Multi-Turn</div>
-                    <div class="text-[11px] sm:text-xs text-slate-400">Konteks Percakapan Terjaga</div>
-                </div>
-                <div class="p-3 sm:p-4 rounded-xl glass-panel md:bg-transparent md:border-none">
-                    <div class="text-xl sm:text-2xl lg:text-3xl font-serif text-cyan-400 mb-1">Real-Time</div>
-                    <div class="text-[11px] sm:text-xs text-slate-400">Inference & Sintesis</div>
-                </div>
-                <div class="p-3 sm:p-4 rounded-xl glass-panel md:bg-transparent md:border-none">
-                    <div class="text-xl sm:text-2xl lg:text-3xl font-serif text-white mb-1">Zero-Slop</div>
-                    <div class="text-[11px] sm:text-xs text-slate-400">System Instruction Preset</div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="demo" class="py-12 sm:py-16 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto relative z-10">
-        <div class="text-center mb-6 sm:mb-8">
-            <span class="text-xs uppercase tracking-widest text-nalar-gold font-mono">Ruang Kerja Interaktif (Gemini Live Engine)</span>
-            <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif text-white mt-1.5 sm:mt-2">Demonstrasi Konsol Nalar Real-Time</h2>
-        </div>
-
-        <!-- Glassmorphism Console Window -->
-        <div class="glass-panel rounded-2xl border border-nalar-gold/20 shadow-2xl overflow-hidden max-w-5xl mx-auto">
-            
-            <!-- Window Titlebar -->
-            <div class="bg-black/50 px-4 sm:px-6 py-3.5 border-b border-white/5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-4">
-                <div class="flex items-center justify-between w-full md:w-auto">
-                    <div class="flex items-center space-x-2">
-                        <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-rose-500/80 inline-block"></span>
-                        <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-amber-500/80 inline-block"></span>
-                        <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-emerald-500/80 inline-block"></span>
-                        <span class="ml-2 sm:ml-4 text-[11px] sm:text-xs font-mono text-slate-400 truncate">nalar-engine // gemini-3-flash</span>
-                    </div>
-                </div>
-
-                <div class="flex flex-wrap items-center justify-between md:justify-end gap-2.5 sm:gap-4 w-full md:w-auto">
-                    <!-- Tool Selector Tabs -->
-                    <div class="flex bg-slate-900/90 p-1 rounded-lg border border-white/10 text-[11px] sm:text-xs font-medium w-full sm:w-auto justify-between sm:justify-start">
-                        <button id="btn-analisis" onclick="setConsoleMode('analisis')" class="flex-1 sm:flex-none px-2.5 py-1.5 rounded-md transition-all text-slate-200 bg-nalar-gold/20 border border-nalar-gold/40 text-center">Sintesis Teks</button>
-                        <button id="btn-logika" onclick="setConsoleMode('logika')" class="flex-1 sm:flex-none px-2.5 py-1.5 rounded-md transition-all text-slate-400 hover:text-slate-200 text-center">Audit Logika</button>
-                        <button id="btn-visual" onclick="setConsoleMode('visual')" class="flex-1 sm:flex-none px-2.5 py-1.5 rounded-md transition-all text-slate-400 hover:text-slate-200 text-center">Vektor SVG</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Console Content Body -->
-            <div class="p-4 sm:p-6 md:p-8 grid md:grid-cols-12 gap-5 sm:gap-6 min-h-[420px] bg-slate-950/40">
-                
-                <!-- Input Panel -->
-                <div class="md:col-span-5 flex flex-col justify-between space-y-4">
-                    <div>
-                        <label class="block text-[11px] sm:text-xs font-mono text-slate-400 uppercase tracking-wider mb-2" id="input-label">
-                            Instruksi Pemikiran Kompleks
-                        </label>
-                        <textarea id="console-input" class="w-full h-36 sm:h-44 bg-slate-900/90 border border-slate-700/60 rounded-xl p-3.5 sm:p-4 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-nalar-gold/60 focus:ring-1 focus:ring-nalar-gold/50 transition-all resize-none font-sans" placeholder="Ketik topik atau permasalahan strategis di sini..."></textarea>
-                    </div>
-
-                    <!-- Mode-Specific Quick Templates -->
-                    <div class="space-y-2">
-                        <span class="text-[10px] sm:text-[11px] text-slate-500 uppercase tracking-wider font-mono">Skenario Presisi:</span>
-                        <div class="flex flex-wrap gap-1.5 sm:gap-2">
-                            <button onclick="setPreset(1)" class="text-[11px] sm:text-xs px-2.5 py-1.5 rounded-lg glass-card text-slate-300 hover:border-nalar-gold/50 transition-colors">Analisis Strategi Bisnis</button>
-                            <button onclick="setPreset(2)" class="text-[11px] sm:text-xs px-2.5 py-1.5 rounded-lg glass-card text-slate-300 hover:border-nalar-gold/50 transition-colors">Evaluasi Filosofis</button>
-                        </div>
-                    </div>
-
-                    <button id="console-run-btn" onclick="runNalarEngine()" class="w-full py-3 sm:py-3.5 rounded-xl bg-gradient-to-r from-nalar-gold to-amber-500 text-slate-950 font-semibold text-xs sm:text-sm hover:brightness-110 shadow-gold-glow transition-all flex items-center justify-center gap-2">
-                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                        </svg>
-                        <span>Proses dengan Gemini API</span>
-                    </button>
-                </div>
-
-                <!-- Output Display Panel -->
-                <div class="md:col-span-7 bg-slate-900/70 border border-slate-800 rounded-xl p-4 sm:p-5 flex flex-col justify-between relative overflow-hidden min-h-[250px]">
-                    <!-- Status Header -->
-                    <div class="flex items-center justify-between pb-3 border-b border-white/5">
-                        <div class="flex items-center gap-2">
-                            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" id="status-dot"></span>
-                            <span class="text-[10px] sm:text-xs font-mono text-cyan-300 truncate" id="status-text">SIAP - GEMINI API CONNECTED</span>
-                        </div>
-                        <span class="text-[9px] sm:text-[10px] font-mono text-slate-500 shrink-0">Live Gemini Output</span>
-                    </div>
-
-                    <!-- Dynamic Output Window -->
-                    <div id="console-output" class="my-4 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans overflow-y-auto max-h-[260px] space-y-3">
-                        <p class="text-slate-500 italic text-xs sm:text-sm">Output sintesis Gemini akan muncul di sini. Silakan masukkan perintah di panel sebelah kiri atau gunakan preset yang tersedia.</p>
-                    </div>
-
-                    <!-- Footer Metadata -->
-                    <div class="pt-3 border-t border-white/5 flex items-center justify-between text-[10px] sm:text-[11px] font-mono text-slate-500">
-                        <div class="flex items-center gap-2">
-                            <span>Engine: <strong class="text-slate-300">gemini-3-flash</strong></span>
-                        </div>
-                        <div class="flex items-center gap-1 text-amber-400">
-                            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none">
-                                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/>
-                                <path d="M9 10H9.01M15 10H15.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M8 15C10 17 14 17 16 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
-                            <span>Nalar Verifiable</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="fitur" class="py-12 sm:py-20 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto relative z-10">
-        <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
-            <span class="text-xs uppercase tracking-widest text-cyan-400 font-mono">Pendekatan Unik</span>
-            <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif text-white mt-1.5 sm:mt-2 mb-3 sm:mb-4">Mengapa Nalar AI Berbeda?</h2>
-            <p class="text-slate-400 text-xs sm:text-sm md:text-base leading-relaxed">
-                Kami meninggalkan pola lama generator teks acak. Nalar dibangun di atas pemrosesan berstruktur tajam untuk profesional yang membutuhkan argumentasi berbobot.
-            </p>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-6 sm:gap-8">
-            
-            <!-- Feature Card 1 -->
-            <div class="glass-card rounded-2xl p-6 sm:p-8 relative overflow-hidden group">
-                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-nalar-gold mb-5 sm:mb-6 group-hover:scale-110 transition-transform">
-                    <svg class="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M12 3v18M3 9l9-6 9 6M3 9l3 6M21 9l-3 6M6 15a3 3 0 100 6 3 3 0 000-6zm12 0a3 3 0 100 6 3 3 0 000-6z"/>
-                    </svg>
-                </div>
-                <h3 class="text-lg sm:text-xl font-serif text-white mb-2 sm:mb-3">Sintesis Berbasis Nalar</h3>
-                <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
-                    Menyaring klise dan jargon generik (AI Slop). Menghasilkan argumen logis, beruntun, dan terstruktur dengan kedalaman analitis murni.
-                </p>
-                <div class="flex items-center gap-2 text-[11px] sm:text-xs font-mono text-nalar-gold">
-                    <span>Arsitektur Anti-Slop</span>
-                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                </div>
-            </div>
-
-            <!-- Feature Card 2 -->
-            <div class="glass-card rounded-2xl p-6 sm:p-8 relative overflow-hidden group">
-                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-5 sm:mb-6 group-hover:scale-110 transition-transform">
-                    <svg class="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <circle cx="6" cy="6" r="3"/>
-                        <circle cx="18" cy="6" r="3"/>
-                        <circle cx="12" cy="18" r="3"/>
-                        <path d="M8.5 7.5L15.5 7.5M7.5 8.5L10.5 15.5M16.5 8.5L13.5 15.5"/>
-                    </svg>
-                </div>
-                <h3 class="text-lg sm:text-xl font-serif text-white mb-2 sm:mb-3">Kontextual Deep-Awareness</h3>
-                <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
-                    Memahami nuansa lokal, konteks bisnis strategis, serta aspek linguistik secara mendalam tanpa kehilangan koherensi jangka panjang.
-                </p>
-                <div class="flex items-center gap-2 text-[11px] sm:text-xs font-mono text-cyan-400">
-                    <span>Multi-Layer Context</span>
-                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                </div>
-            </div>
-
-            <!-- Feature Card 3 -->
-            <div class="glass-card rounded-2xl p-6 sm:p-8 relative overflow-hidden group">
-                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 mb-5 sm:mb-6 group-hover:scale-110 transition-transform">
-                    <svg class="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M4 6h16M4 12h10M4 18h14"/>
-                        <circle cx="18" cy="12" r="2" fill="currentColor"/>
-                    </svg>
-                </div>
-                <h3 class="text-lg sm:text-xl font-serif text-white mb-2 sm:mb-3">Estetika Editorial</h3>
-                <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
-                    Didesain khusus untuk eksekutif, penulis, dan peneliti. Format output yang disajikan siap dipublikasikan dengan standar estetika tinggi.
-                </p>
-                <div class="flex items-center gap-2 text-[11px] sm:text-xs font-mono text-purple-400">
-                    <span>Format Publication-Ready</span>
-                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="kapabilitas" class="py-12 sm:py-16 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto my-6 sm:my-12">
-        <div class="glass-panel rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 border border-white/10 relative overflow-hidden">
-            <div class="grid lg:grid-cols-12 gap-8 items-center">
-                
-                <div class="lg:col-span-6 space-y-5 sm:space-y-6">
-                    <span class="px-3 py-1 rounded-full text-[11px] sm:text-xs font-mono bg-nalar-gold/10 text-nalar-gold border border-nalar-gold/30">Visualisasi Metrik Pemikiran</span>
-                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-serif text-white leading-snug sm:leading-tight">
-                        Bagaimana Nalar Memproses Gagasan Tanpa Bias
-                    </h2>
-                    <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
-                        Arsitektur Nalar AI membagi proses sintesis menjadi tiga tahap krusial: Dekonstruksi Klaim, Validasi Silang Rangkaian Logika, dan Rekonstruksi Naratif Berbobot.
-                    </p>
-
-                    <div class="space-y-3.5 sm:space-y-4 pt-2">
-                        <div class="flex items-start gap-3.5 sm:gap-4">
-                            <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-nalar-gold/20 text-nalar-gold flex items-center justify-center font-mono text-xs sm:text-sm shrink-0 mt-0.5">1</div>
-                            <div>
-                                <h4 class="text-white font-medium text-xs sm:text-sm">Dekonstruksi Premis</h4>
-                                <p class="text-[11px] sm:text-xs text-slate-400 mt-0.5">Mengisolasi fakta dari retorika kosong dan asumsi tanpa dasar.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start gap-3.5 sm:gap-4">
-                            <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-mono text-xs sm:text-sm shrink-0 mt-0.5">2</div>
-                            <div>
-                                <h4 class="text-white font-medium text-xs sm:text-sm">Filter Kognitif Anti-Slop</h4>
-                                <p class="text-[11px] sm:text-xs text-slate-400 mt-0.5">Eliminasi kalimat pengisi pasaran seperti "Di era digital ini..." atau "Merupakan hal penting...".</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start gap-3.5 sm:gap-4">
-                            <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-mono text-xs sm:text-sm shrink-0 mt-0.5">3</div>
-                            <div>
-                                <h4 class="text-white font-medium text-xs sm:text-sm">Sintesis Akhir Berpresisi High-Value</h4>
-                                <p class="text-[11px] sm:text-xs text-slate-400 mt-0.5">Formulasi argumen yang tajam, lugas, dan memiliki daya tawar konseptual.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Custom Vector Art Diagram -->
-                <div class="lg:col-span-6 flex justify-center">
-                    <div class="relative w-full max-w-[340px] sm:max-w-md aspect-square rounded-2xl bg-slate-950/80 border border-slate-800 p-4 sm:p-6 flex flex-col items-center justify-center">
-                        <svg class="w-full h-full" viewBox="0 0 300 300" fill="none">
-                            <circle cx="150" cy="150" r="130" stroke="rgba(212, 175, 55, 0.15)" stroke-width="1" stroke-dasharray="4 4"/>
-                            <circle cx="150" cy="150" r="100" stroke="rgba(0, 229, 255, 0.2)" stroke-width="1.5"/>
-                            
-                            <g class="animate-subtle">
-                                <circle cx="150" cy="50" r="7" fill="#D4AF37"/>
-                                <circle cx="236" cy="200" r="7" fill="#00E5FF"/>
-                                <circle cx="64" cy="200" r="7" fill="#A855F7"/>
-                            </g>
-
-                            <path d="M150 50 L236 200 L64 200 Z" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
-                            <path d="M150 150 L150 50 M150 150 L236 200 M150 150 L64 200" stroke="rgba(212,175,55,0.3)" stroke-width="1"/>
-
-                            <circle cx="150" cy="150" r="30" fill="url(#coreGradient)" stroke="#D4AF37" stroke-width="2"/>
-                            
-                            <g transform="translate(138, 138)">
-                                <path d="M12 2L14 9L21 12L14 15L12 22L10 15L3 12L10 9L12 2Z" fill="#FFF"/>
-                            </g>
-
-                            <text x="150" y="32" fill="#D4AF37" font-size="9" font-family="sans-serif" text-anchor="middle">PREMIS LOGIS</text>
-                            <text x="250" y="220" fill="#00E5FF" font-size="9" font-family="sans-serif" text-anchor="start">DATA LOKAL</text>
-                            <text x="50" y="220" fill="#A855F7" font-size="9" font-family="sans-serif" text-anchor="end">SINTESIS </text>
-
-                            <defs>
-                                <radialGradient id="coreGradient" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(150 150) rotate(90) scale(32)">
-                                    <stop stop-color="#D4AF37"/>
-                                    <stop offset="1" stop-color="#0A0B0E"/>
-                                </radialGradient>
-                            </defs>
-                        </svg>
-
-                        <!-- Live Status Overlay -->
-                        <div class="absolute bottom-3 left-3 right-3 glass-panel rounded-xl p-2.5 border border-white/10 flex items-center justify-between text-[10px] sm:text-xs font-mono">
-                            <span class="text-slate-400">Status Alur: <span class="text-emerald-400">Optimum</span></span>
-                            <span class="text-nalar-gold">0% Relevansi</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="filosofi" class="py-12 sm:py-20 px-4 sm:px-6 max-w-4xl mx-auto text-center relative z-10">
-        <div class="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-5 sm:mb-6 rounded-full bg-nalar-gold/10 border border-nalar-gold/30 flex items-center justify-center text-nalar-gold">
-            <svg class="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none">
-                <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="currentColor" stroke-width="1.5"/>
-                <path d="M12 7V12L15 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-        </div>
-
-        <blockquote class="text-lg sm:text-2xl md:text-3xl font-serif italic text-slate-100 leading-relaxed sm:leading-relaxed mb-4 sm:mb-6 px-2">
-            &ldquo;Teknologi kecerdasan seharusnya memperdalam cara manusia berpikir, bukan menggantikan substansi dengan tumpukan kata tanpa makna.&rdquo;
-        </blockquote>
-        <p class="text-[10px] sm:text-xs uppercase tracking-widest text-nalar-gold font-mono">— Prinsip Pengembangan Nalar AI</p>
-    </section>
-
-    <button onclick="openChatModal()" class="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 p-3.5 sm:p-4 rounded-full bg-gradient-to-r from-nalar-gold to-amber-500 text-slate-950 font-bold shadow-gold-glow hover:scale-110 transition-all flex items-center gap-2">
-        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
-        </svg>
-        <span class="hidden md:inline font-sans text-xs">Konsol Chat</span>
-    </button>
-
-    <!-- AI Chat Modal Interface -->
-    <div id="chat-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-2.5 sm:p-4 md:p-6">
-        <div class="glass-panel w-full max-w-3xl h-[92vh] sm:h-[85vh] rounded-2xl border border-nalar-gold/30 shadow-2xl flex flex-col overflow-hidden relative">
-            
-            <!-- Modal Header -->
-            <div class="bg-black/70 px-4 sm:px-6 py-3.5 border-b border-white/10 flex items-center justify-between">
-                <div class="flex items-center gap-2.5 sm:gap-3 truncate">
-                    <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-nalar-gold/20 border border-nalar-gold/40 flex items-center justify-center text-nalar-gold font-bold text-xs sm:text-sm shrink-0">
-                        N
-                    </div>
-                    <div class="truncate">
-                        <h3 class="text-xs sm:text-sm font-bold text-white tracking-wide truncate">Nalar AI (Gemini 3 Flash)</h3>
-                        <div class="flex items-center gap-1.5 text-[9px] sm:text-[10px] text-cyan-400 font-mono">
-                            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
-                            <span class="truncate">Gemini Direct Stream</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex items-center gap-2 sm:gap-3 shrink-0">
-                    <button onclick="closeChatModal()" class="text-slate-400 hover:text-white p-1.5 rounded-lg transition-colors">
-                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Chat Messages Container -->
-            <div id="chat-messages" class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 font-sans text-xs sm:text-sm">
-                <!-- Bot Welcome Message -->
-                <div class="flex gap-2.5 sm:gap-3 max-w-[90%] sm:max-w-[85%]">
-                    <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-nalar-gold/20 border border-nalar-gold/40 flex items-center justify-center text-nalar-gold font-bold text-xs shrink-0">
-                        AI
-                    </div>
-                    <div class="glass-card p-3.5 sm:p-4 rounded-2xl rounded-tl-none border-white/10 text-slate-200 leading-relaxed">
-                        Halo! Saya Nalar AI yang ditenagai oleh model Gemini 3 Flash. Ada topik, analisis strategis, atau pertanyaan logis yang ingin kita selidiki bersama hari ini?
-                    </div>
-                </div>
-            </div>
-
-            <!-- Chat Input Area -->
-            <div class="p-3 sm:p-4 bg-slate-950/90 border-t border-white/10">
-                <form id="chat-form" onsubmit="handleSendChat(event)" class="flex items-center gap-2">
-                    <input type="text" id="chat-input" placeholder="Tanyakan apa saja kepada Nalar AI..." class="flex-1 bg-slate-900 border border-slate-700/80 rounded-xl px-3.5 py-2.5 sm:py-3 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-nalar-gold/60 focus:ring-1 focus:ring-nalar-gold/40 transition-all font-sans" required />
-                    <button type="submit" id="chat-send-btn" class="px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl bg-gradient-to-r from-nalar-gold to-amber-500 text-slate-950 font-semibold text-xs sm:text-sm hover:brightness-110 shadow-gold-glow transition-all flex items-center gap-1 shrink-0">
-                        <span>Kirim</span>
-                        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
-                        </svg>
-                    </button>
-                </form>
-            </div>
-
-        </div>
+<main>
+<div class="wrap hero">
+  <div>
+    <h1>Nalar membedah klaim sebelum Anda mempercayainya.</h1>
+    <p class="lead">Asisten AI berbahasa Indonesia untuk menganalisis, mengaudit logika, dan menyusun argumen, tanpa kalimat pengisi.</p>
+    <div class="cta">
+      <button class="btn" onclick="openChatModal()">Mulai chat</button>
+      <a class="btn alt" href="#demo">Coba audit logika</a>
     </div>
+  </div>
+  <div class="sheet" aria-label="Contoh hasil audit logika">
+    <small>Klaim yang diuji</small>
+    <p class="claim">AI <span class="hl">pasti</span> akan menggantikan <span class="wavy">seluruh pekerjaan manusia</span> karena bekerja 24 jam tanpa lelah.</p>
+    <div class="note">
+      <svg viewBox="0 0 34 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 26C6 14 14 8 28 6M21 3l7 3-5 6"/></svg>
+      <span>Klaim mutlak. Buktinya mana?</span>
+    </div>
+    <div class="note r">
+      <svg viewBox="0 0 34 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 26C8 18 16 12 28 8M21 4l7 4-5 6"/></svg>
+      <span>Generalisasi. Tahan lelah tidak sama dengan mampu menggantikan semua peran.</span>
+    </div>
+  </div>
+</div>
 
+<section id="demo"><div class="wrap">
+  <h2>Coba langsung</h2>
+  <p class="sub">Pilih mode, tulis teks Anda, lalu lihat hasilnya di sebelah kanan.</p>
+  <div class="console">
+    <div class="bar">
+      <div class="tabs" role="tablist">
+        <button class="tab on" id="btn-analisis" onclick="setConsoleMode('analisis')">Sintesis teks</button>
+        <button class="tab" id="btn-logika" onclick="setConsoleMode('logika')">Audit logika</button>
+        <button class="tab" id="btn-visual" onclick="setConsoleMode('visual')">Vektor SVG</button>
+      </div>
+      <span>Model: gemini-3-flash</span>
+    </div>
+    <div class="body">
+      <div class="pane">
+        <label for="console-input" id="input-label">Instruksi</label>
+        <textarea id="console-input" placeholder="Tulis topik atau masalah Anda di sini"></textarea>
+        <div class="chips">
+          <button class="chip" onclick="setPreset(1)">Strategi bisnis</button>
+          <button class="chip" onclick="setPreset(2)">Pertanyaan filosofis</button>
+        </div>
+        <button class="btn" id="console-run-btn" onclick="runNalarEngine()">Jalankan</button>
+      </div>
+      <div class="pane">
+        <div class="status"><span class="dot" id="status-dot"></span><span id="status-text">Siap dijalankan</span></div>
+        <div id="console-output" aria-live="polite"><p class="empty">Hasil akan muncul di sini. Tulis instruksi di sebelah kiri, atau pilih contoh yang tersedia.</p></div>
+      </div>
+    </div>
+  </div>
+</div></section>
 
-    <script>
-        // Chat History state for multi-turn Gemini conversation
-        let chatHistory = [];
-        const CHAT_SYSTEM_PROMPT = "Anda adalah Nalar AI, asisten kecerdasan sintetis tingkat tinggi yang berfokus pada kedalaman logika, objektivitas, analisis berstruktur tajam, dan bebas dari klise/filler (anti-AI slop). Tanggapi dalam bahasa Indonesia yang elegan dan presisi.";
+<section id="cara"><div class="wrap">
+  <h2>Tiga langkah sebelum jawaban keluar</h2>
+  <p class="sub">Nalar tidak langsung menulis. Ia memeriksa dulu apa yang sebenarnya dikatakan.</p>
+  <div class="steps">
+    <div class="step">
+      <svg viewBox="0 0 64 64" fill="none" stroke="#12203A" stroke-width="2"><circle cx="32" cy="32" r="29" fill="#F2E35B"/><text x="32" y="42" text-anchor="middle" font-size="28" font-weight="800" fill="#12203A" stroke="none" font-family="Schibsted Grotesk,sans-serif">1</text></svg>
+      <h3>Bongkar klaim</h3><p>Fakta dipisahkan dari retorika dan asumsi yang belum dibuktikan.</p>
+    </div>
+    <div class="step">
+      <svg viewBox="0 0 64 64" fill="none" stroke="#12203A" stroke-width="2" stroke-linejoin="round"><path d="M32 3l29 29-29 29L3 32z" fill="#F6F8F3"/><text x="32" y="42" text-anchor="middle" font-size="28" font-weight="800" fill="#12203A" stroke="none" font-family="Schibsted Grotesk,sans-serif">2</text></svg>
+      <h3>Uji rangkaian logika</h3><p>Tiap premis dicek: apakah kesimpulannya benar-benar mengikuti dari sana?</p>
+    </div>
+    <div class="step">
+      <svg viewBox="0 0 64 64" fill="none" stroke="#12203A" stroke-width="2" stroke-linejoin="round"><rect x="4" y="4" width="56" height="56" rx="6" fill="#12203A"/><text x="32" y="42" text-anchor="middle" font-size="28" font-weight="800" fill="#F2E35B" stroke="none" font-family="Schibsted Grotesk,sans-serif">3</text></svg>
+      <h3>Susun ulang</h3><p>Argumen ditulis ringkas, tanpa pembuka dan penutup yang hanya mengisi ruang.</p>
+    </div>
+  </div>
+</div></section>
 
-        // Helper function: proxy to Ikyy Gemini endpoint through our Vercel API.
-        // A per-browser session ID lets the upstream API keep conversation context.
-        const memorySessions = {};
-        function getNalarSessionId(scope = 'chat') {
-            if (scope.startsWith('console-')) return 'nalar-' + scope; // sekali pakai, tidak disimpan
-            const key = 'nalar_ai_session_' + scope;
-            const make = () => 'nalar-' + scope + '-' + (globalThis.crypto?.randomUUID?.() || (Date.now() + '-' + Math.random().toString(36).slice(2)));
-            try {
-                let id = localStorage.getItem(key);
-                if (!id) { id = make(); localStorage.setItem(key, id); }
-                return id;
-            } catch (_) {
-                return memorySessions[scope] || (memorySessions[scope] = make());
-            }
-        }
+<section id="filosofi"><div class="wrap">
+  <blockquote>Teknologi kecerdasan seharusnya memperdalam cara manusia berpikir, bukan menggantikan substansi dengan tumpukan kata tanpa makna.</blockquote>
+  <p class="src">Prinsip pengembangan Nalar AI</p>
+</div></section>
+</main>
 
-        async function fetchGeminiWithBackoff(text, scope = 'chat', retries = 3, delay = 1000) {
-            if (!text || !text.trim()) throw new Error('Teks prompt tidak boleh kosong.');
+<button class="btn fab" onclick="openChatModal()" aria-label="Buka chat">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg>Chat
+</button>
 
-            for (let i = 0; i < retries; i++) {
-                let retryable = true;
-                try {
-                    const response = await fetch('/api/chat', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ text, sessionsId: getNalarSessionId(scope) })
-                    });
-                    const data = await response.json().catch(() => ({}));
-                    if (response.ok) return data;
-                    retryable = response.status >= 500;
-                    throw new Error(data.error || `HTTP ${response.status}`);
-                } catch (e) {
-                    if (!retryable || i === retries - 1) throw e;
-                }
-                await new Promise(res => setTimeout(res, delay * Math.pow(2, i)));
-            }
-            throw new Error('Gagal menghubungkan ke layanan AI setelah beberapa kali percobaan.');
-        }
+<div id="chat-modal" class="modal" role="dialog" aria-modal="true" aria-label="Chat Nalar AI">
+  <div class="dialog">
+    <div class="bar"><b>Nalar AI</b><span>gemini-3-flash</span><button class="x" onclick="closeChatModal()" aria-label="Tutup chat">&times;</button></div>
+    <div id="chat-messages">
+      <div class="msg"><div class="av">N</div><div class="bub">Halo, saya Nalar AI. Ada topik, analisis, atau argumen yang ingin kita periksa bersama?</div></div>
+    </div>
+    <form id="chat-form" onsubmit="handleSendChat(event)">
+      <input type="text" id="chat-input" placeholder="Tulis pertanyaan Anda" required>
+      <button type="submit" id="chat-send-btn" class="btn">Kirim</button>
+    </form>
+  </div>
+</div>
 
-        // Modal Controls
-        function openChatModal() {
-            const modal = document.getElementById('chat-modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            setTimeout(() => {
-                document.getElementById('chat-input')?.focus();
-            }, 100);
-        }
+<script>
+let chatHistory=[];
+const CHAT_SYSTEM_PROMPT="Anda adalah Nalar AI, asisten kecerdasan sintetis tingkat tinggi yang berfokus pada kedalaman logika, objektivitas, analisis berstruktur tajam, dan bebas dari klise/filler (anti-AI slop). Tanggapi dalam bahasa Indonesia yang elegan dan presisi.";
+const memorySessions={};
+function getNalarSessionId(scope='chat'){
+  if(scope.startsWith('console-'))return 'nalar-'+scope;
+  const key='nalar_ai_session_'+scope;
+  const make=()=>'nalar-'+scope+'-'+(globalThis.crypto?.randomUUID?.()||(Date.now()+'-'+Math.random().toString(36).slice(2)));
+  try{let id=localStorage.getItem(key);if(!id){id=make();localStorage.setItem(key,id)}return id}
+  catch(_){return memorySessions[scope]||(memorySessions[scope]=make())}
+}
+async function fetchGeminiWithBackoff(text,scope='chat',retries=3,delay=1000){
+  if(!text||!text.trim())throw new Error('Teks prompt tidak boleh kosong.');
+  for(let i=0;i<retries;i++){
+    let retryable=true;
+    try{
+      const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,sessionsId:getNalarSessionId(scope)})});
+      const data=await response.json().catch(()=>({}));
+      if(response.ok)return data;
+      retryable=response.status>=500;
+      throw new Error(data.error||`HTTP ${response.status}`);
+    }catch(e){if(!retryable||i===retries-1)throw e}
+    await new Promise(res=>setTimeout(res,delay*Math.pow(2,i)));
+  }
+  throw new Error('Gagal menghubungkan ke layanan AI setelah beberapa kali percobaan.');
+}
+const $=id=>document.getElementById(id);
+const SPIN='<svg class="spin" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="9" stroke-dasharray="15 6"/></svg>';
+function openChatModal(){$('chat-modal').classList.add('open');setTimeout(()=>$('chat-input')?.focus(),100)}
+function closeChatModal(){$('chat-modal').classList.remove('open')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeChatModal()});
+const botMsg=(html,err)=>`<div class="msg"><div class="av${err?' err':''}">${err?'!':'N'}</div><div class="bub${err?' err':''}">${html}</div></div>`;
 
-        function closeChatModal() {
-            const modal = document.getElementById('chat-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
+async function handleSendChat(event){
+  event.preventDefault();
+  const inputEl=$('chat-input'),box=$('chat-messages'),sendBtn=$('chat-send-btn');
+  const query=inputEl.value.trim();
+  if(!query)return;
+  box.innerHTML+=`<div class="msg user"><div class="bub">${escapeHtml(query)}</div></div>`;
+  inputEl.value='';
+  const loadingId='loading-'+Date.now();
+  box.innerHTML+=`<div id="${loadingId}">${botMsg(SPIN+'Nalar sedang menalar...')}</div>`;
+  box.scrollTop=box.scrollHeight;
+  sendBtn.disabled=true;
+  const isFirstTurn=chatHistory.length===0;
+  chatHistory.push({role:'user',parts:[{text:query}]});
+  const promptText=isFirstTurn?CHAT_SYSTEM_PROMPT+'\n\nPertanyaan pengguna: '+query:query;
+  try{
+    const result=await fetchGeminiWithBackoff(promptText,'chat');
+    $(loadingId)?.remove();
+    const c=result.candidates?.[0];
+    if(c&&c.content?.parts?.[0]?.text){
+      const aiText=c.content.parts[0].text;
+      chatHistory.push({role:'model',parts:[{text:aiText}]});
+      box.innerHTML+=botMsg(formatMarkdownText(aiText));
+    }else throw new Error('Format respon tidak valid');
+  }catch(err){
+    chatHistory.pop();
+    $(loadingId)?.remove();
+    box.innerHTML+=botMsg('Koneksi gagal: '+escapeHtml(err.message)+'. Coba kirim ulang pesan Anda.',true);
+  }finally{sendBtn.disabled=false;box.scrollTop=box.scrollHeight}
+}
 
-        async function handleSendChat(event) {
-            event.preventDefault();
-            const inputEl = document.getElementById('chat-input');
-            const messagesContainer = document.getElementById('chat-messages');
-            const sendBtn = document.getElementById('chat-send-btn');
-            const query = inputEl.value.trim();
-
-            if (!query) return;
-
-            // Render User Message
-            messagesContainer.innerHTML += `
-                <div class="flex gap-2.5 sm:gap-3 justify-end">
-                    <div class="bg-gradient-to-r from-nalar-gold/20 to-amber-500/20 border border-nalar-gold/40 p-3.5 sm:p-4 rounded-2xl rounded-tr-none text-slate-100 max-w-[90%] sm:max-w-[85%] font-sans">
-                        ${escapeHtml(query)}
-                    </div>
-                </div>
-            `;
-            
-            inputEl.value = '';
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-
-            // Show Loading Indicator
-            const loadingId = 'loading-' + Date.now();
-            messagesContainer.innerHTML += `
-                <div id="${loadingId}" class="flex gap-2.5 sm:gap-3 max-w-[90%] sm:max-w-[85%]">
-                    <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-nalar-gold/20 border border-nalar-gold/40 flex items-center justify-center text-nalar-gold font-bold text-xs shrink-0">
-                        AI
-                    </div>
-                    <div class="glass-card p-3.5 sm:p-4 rounded-2xl rounded-tl-none border-white/10 text-slate-400 flex items-center gap-2">
-                        <svg class="w-4 h-4 animate-spin text-cyan-400" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-dasharray="15 5"></circle></svg>
-                        <span>Menyintesis dengan Nalar Gemini...</span>
-                    </div>
-                </div>
-            `;
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-
-            sendBtn.disabled = true;
-
-            // Instruksi sistem hanya dikirim di pesan pertama; konteks selanjutnya dijaga oleh session ID
-            const isFirstTurn = chatHistory.length === 0;
-            chatHistory.push({ role: 'user', parts: [{ text: query }] });
-            const promptText = isFirstTurn ? CHAT_SYSTEM_PROMPT + '\n\nPertanyaan pengguna: ' + query : query;
-
-            try {
-                const result = await fetchGeminiWithBackoff(promptText, 'chat');
-                document.getElementById(loadingId)?.remove();
-
-                const candidate = result.candidates?.[0];
-                if (candidate && candidate.content?.parts?.[0]?.text) {
-                    const aiText = candidate.content.parts[0].text;
-                    
-                    // Update chat history
-                    chatHistory.push({ role: 'model', parts: [{ text: aiText }] });
-
-                    messagesContainer.innerHTML += `
-                        <div class="flex gap-2.5 sm:gap-3 max-w-[90%] sm:max-w-[85%]">
-                            <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-nalar-gold/20 border border-nalar-gold/40 flex items-center justify-center text-nalar-gold font-bold text-xs shrink-0">
-                                AI
-                            </div>
-                            <div class="glass-card p-3.5 sm:p-4 rounded-2xl rounded-tl-none border-white/10 text-slate-200 leading-relaxed font-sans">
-                                ${formatMarkdownText(aiText)}
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    throw new Error("Format respon tidak valid");
-                }
-            } catch (err) {
-                chatHistory.pop(); // buang pesan user yang gagal agar giliran pertama tetap membawa instruksi sistem
-                document.getElementById(loadingId)?.remove();
-                messagesContainer.innerHTML += `
-                    <div class="flex gap-2.5 sm:gap-3 max-w-[90%] sm:max-w-[85%]">
-                        <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-rose-500/20 border border-rose-500/40 flex items-center justify-center text-rose-400 font-bold text-xs shrink-0">
-                            !
-                        </div>
-                        <div class="glass-card p-3.5 sm:p-4 rounded-2xl rounded-tl-none border-rose-500/30 text-rose-300">
-                            Kendala Koneksi Gemini: ${escapeHtml(err.message)}
-                        </div>
-                    </div>
-                `;
-            } finally {
-                sendBtn.disabled = false;
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
-            }
-        }
-
-        let currentMode = 'analisis';
-        const consolePrompts = {
-            analisis: {
-                label: 'Instruksi Pemikiran & Sintesis Kompleks',
-                defaultInput: "Berikan analisis komparatif mengenai dampak penerapan otomasi AI terhadap struktur tenaga kerja sektor kreatif di Indonesia dalam 5 tahun ke depan.",
-                systemInstruction: "Anda adalah modul 'Sintesis Teks Nalar AI'. Tugas Anda adalah memberikan analisis yang sangat tajam, terstruktur, mendalam, dan anti-mainstream tanpa jargon generik. Gunakan poin-poin yang tegas dan langsung pada inti pemikiran."
-            },
-            logika: {
-                label: 'Masukkan Argumen / Paragraf untuk Diaudit Logikanya',
-                defaultInput: "AI pasti akan menggantikan seluruh pekerjaan manusia karena AI bekerja 24 jam tanpa lelah dan memiliki semua data di internet.",
-                systemInstruction: "Anda adalah modul 'Audit Logika Nalar AI'. Tugas Anda adalah menguji dan membedah kekeliruan berpikir (logical fallacy), asumsi tanpa dasar, serta mengidentifikasi celah logika dalam teks input. Berikan evaluasi rasional dan usulan koreksi premis."
-            },
-            visual: {
-                label: 'Deskripsi Konsep / Elemen Vektor SVG yang Diharapkan',
-                defaultInput: "Buatlah kode SVG ringkas (tanpa pembungkus penjelasan ekstra) untuk elemen arsitektur jaringan AI terdistribusi berwarna emas dan sian.",
-                systemInstruction: "Anda adalah modul 'Konstruksi Vektor Nalar AI'. Jika input meminta SVG, hasilkan kode SVG murni dengan warna emas (#D4AF37) dan sian (#00E5FF) yang modern dan bersih. Sertakan deskripsi singkat 1 kalimat."
-            }
-        };
-
-        function setConsoleMode(mode) {
-            currentMode = mode;
-            document.getElementById('btn-analisis').className = "flex-1 sm:flex-none px-2.5 py-1.5 rounded-md transition-all text-slate-400 hover:text-slate-200 text-center";
-            document.getElementById('btn-logika').className = "flex-1 sm:flex-none px-2.5 py-1.5 rounded-md transition-all text-slate-400 hover:text-slate-200 text-center";
-            document.getElementById('btn-visual').className = "flex-1 sm:flex-none px-2.5 py-1.5 rounded-md transition-all text-slate-400 hover:text-slate-200 text-center";
-
-            document.getElementById(`btn-${mode}`).className = "flex-1 sm:flex-none px-2.5 py-1.5 rounded-md transition-all text-slate-200 bg-nalar-gold/20 border border-nalar-gold/40 text-center";
-            document.getElementById('input-label').innerText = consolePrompts[mode].label;
-            document.getElementById('console-input').value = consolePrompts[mode].defaultInput;
-        }
-
-        function setPreset(num) {
-            if (num === 1) {
-                document.getElementById('console-input').value = "Bagaimana merancang strategi penetrasi pasar untuk produk teknologi kesehatan berbasis AI tanpa terkesan menggunakan jargon pasaran?";
-            } else {
-                document.getElementById('console-input').value = "Apakah kecerdasan buatan dapat memiliki kesadaran eksistensial, ataukah ia hanya simulasi statistik yang sangat halus?";
-            }
-        }
-
-        async function runNalarEngine() {
-            const inputVal = document.getElementById('console-input').value.trim();
-            const outputBox = document.getElementById('console-output');
-            const statusText = document.getElementById('status-text');
-            const statusDot = document.getElementById('status-dot');
-            const runBtn = document.getElementById('console-run-btn');
-
-            if (!inputVal) return;
-
-            runBtn.disabled = true;
-
-            statusText.innerText = "MEMPROSES SINTESIS LOGIKA VIA I KYY GEMINI API...";
-            statusText.className = "text-[10px] sm:text-xs font-mono text-nalar-gold animate-pulse truncate";
-            statusDot.className = "w-2 h-2 rounded-full bg-nalar-gold animate-ping";
-
-            outputBox.innerHTML = `
-                <div class="flex items-center gap-2 text-slate-400 font-mono text-xs">
-                    <svg class="w-4 h-4 animate-spin text-nalar-gold shrink-0" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-dasharray="15 5"></circle></svg>
-                    <span>Mengkalkulasi penalaran dengan Ikyy Gemini API...</span>
-                </div>
-            `;
-
-            // Tiap eksekusi konsol berdiri sendiri: instruksi mode digabung ke prompt, session ID baru
-            const promptText = consolePrompts[currentMode].systemInstruction + '\n\nInput pengguna:\n' + inputVal;
-            const consoleSession = 'console-' + currentMode + '-' + Date.now();
-
-            try {
-                const result = await fetchGeminiWithBackoff(promptText, consoleSession);
-                const candidate = result.candidates?.[0];
-
-                if (candidate && candidate.content?.parts?.[0]?.text) {
-                    const responseText = candidate.content.parts[0].text;
-                    outputBox.innerHTML = currentMode === 'visual' ? renderSvgOrText(responseText) : formatMarkdownText(responseText);
-
-                    statusText.innerText = "SINTESIS GEMINI SELESAI - STATUS: OPTIMUM";
-                    statusText.className = "text-[10px] sm:text-xs font-mono text-emerald-400 truncate";
-                    statusDot.className = "w-2 h-2 rounded-full bg-emerald-400";
-                } else {
-                    throw new Error("Respon kosong atau tidak valid dari API.");
-                }
-            } catch (err) {
-                outputBox.innerHTML = `<span class="text-rose-400">Gagal memproses instruksi: ${escapeHtml(err.message)}</span>`;
-                statusText.innerText = "STATUS: ERROR KONEKSI";
-                statusText.className = "text-[10px] sm:text-xs font-mono text-rose-400 truncate";
-                statusDot.className = "w-2 h-2 rounded-full bg-rose-500";
-            } finally {
-                runBtn.disabled = false;
-            }
-        }
-
-        function escapeHtml(text) {
-            return text
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
-        }
-
-        function inlineMarkdown(escaped) {
-            return escaped
-                .replace(/`([^`\n]+)`/g, '<code class="px-1 py-0.5 rounded bg-black/40 text-nalar-gold font-mono text-[0.9em]">$1</code>')
-                .replace(/\*\*(.+?)\*\*/g, '<strong class="text-white">$1</strong>')
-                .replace(/(^|[^*])\*(?!\s)([^*\n]+?)\*(?!\*)/g, '$1<em>$2</em>');
-        }
-
-        function formatMarkdownText(text) {
-            const lines = String(text).replace(/\r/g, '').split('\n');
-            let html = '', inCode = false, codeBuf = [], listType = null;
-            const closeList = () => { if (listType) { html += `</${listType}>`; listType = null; } };
-
-            for (const raw of lines) {
-                if (raw.trim().startsWith('```')) {
-                    if (inCode) {
-                        html += `<pre class="my-2 p-3 rounded-lg bg-black/50 border border-white/10 overflow-x-auto text-[11px] sm:text-xs font-mono text-slate-200"><code>${escapeHtml(codeBuf.join('\n'))}</code></pre>`;
-                        codeBuf = []; inCode = false;
-                    } else { closeList(); inCode = true; }
-                    continue;
-                }
-                if (inCode) { codeBuf.push(raw); continue; }
-
-                const line = escapeHtml(raw);
-                let m;
-                if ((m = line.match(/^\s*#{1,6}\s+(.*)$/))) {
-                    closeList();
-                    html += `<div class="mt-3 mb-1 font-semibold text-white">${inlineMarkdown(m[1])}</div>`;
-                } else if ((m = line.match(/^\s*[-*•]\s+(.*)$/))) {
-                    if (listType !== 'ul') { closeList(); html += '<ul class="list-disc pl-5 space-y-1 my-1">'; listType = 'ul'; }
-                    html += `<li>${inlineMarkdown(m[1])}</li>`;
-                } else if ((m = line.match(/^\s*\d+[.)]\s+(.*)$/))) {
-                    if (listType !== 'ol') { closeList(); html += '<ol class="list-decimal pl-5 space-y-1 my-1">'; listType = 'ol'; }
-                    html += `<li>${inlineMarkdown(m[1])}</li>`;
-                } else if (line.trim() === '') {
-                    closeList();
-                    html += '<div class="h-2"></div>';
-                } else {
-                    closeList();
-                    html += `<div>${inlineMarkdown(line)}</div>`;
-                }
-            }
-            if (inCode) html += `<pre class="my-2 p-3 rounded-lg bg-black/50 border border-white/10 overflow-x-auto text-xs font-mono"><code>${escapeHtml(codeBuf.join('\n'))}</code></pre>`;
-            closeList();
-            return html;
-        }
-
-        // Mode "Vektor SVG": tampilkan gambar SVG-nya (lewat <img> data-URI, jadi skrip tidak bisa berjalan) + kodenya
-        function renderSvgOrText(text) {
-            const match = String(text).match(/<svg[\s\S]*?<\/svg>/i);
-            if (!match) return formatMarkdownText(text);
-            let svg = match[0]
-                .replace(/<script[\s\S]*?<\/script>/gi, '')
-                .replace(/<foreignObject[\s\S]*?<\/foreignObject>/gi, '')
-                .replace(/\son\w+\s*=\s*("[^"]*"|'[^']*')/gi, '');
-            if (!/xmlns=/.test(svg)) svg = svg.replace(/<svg/i, '<svg xmlns="http://www.w3.org/2000/svg"');
-            const dataUri = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
-            const description = String(text).replace(/```(?:svg|xml|html)?[\s\S]*?```/gi, '').replace(match[0], '').trim();
-            return `
-                <div class="flex justify-center p-3 rounded-lg bg-black/40 border border-white/10">
-                    <img src="${dataUri}" alt="Hasil vektor SVG" class="max-w-full max-h-56" />
-                </div>
-                ${description ? `<div class="mt-2">${formatMarkdownText(description)}</div>` : ''}
-                <details class="mt-2 text-xs text-slate-400">
-                    <summary class="cursor-pointer hover:text-nalar-gold">Lihat kode SVG</summary>
-                    <pre class="mt-2 p-3 rounded-lg bg-black/50 border border-white/10 overflow-x-auto font-mono text-[11px]"><code>${escapeHtml(svg)}</code></pre>
-                </details>`;
-        }
-
-        window.onload = function() {
-            document.getElementById('console-input').value = consolePrompts['analisis'].defaultInput;
-        }
-    </script>
+let currentMode='analisis';
+const consolePrompts={
+  analisis:{label:'Instruksi',defaultInput:"Berikan analisis komparatif mengenai dampak penerapan otomasi AI terhadap struktur tenaga kerja sektor kreatif di Indonesia dalam 5 tahun ke depan.",systemInstruction:"Anda adalah modul 'Sintesis Teks Nalar AI'. Tugas Anda adalah memberikan analisis yang sangat tajam, terstruktur, mendalam, dan anti-mainstream tanpa jargon generik. Gunakan poin-poin yang tegas dan langsung pada inti pemikiran."},
+  logika:{label:'Argumen atau paragraf yang ingin diaudit',defaultInput:"AI pasti akan menggantikan seluruh pekerjaan manusia karena AI bekerja 24 jam tanpa lelah dan memiliki semua data di internet.",systemInstruction:"Anda adalah modul 'Audit Logika Nalar AI'. Tugas Anda adalah menguji dan membedah kekeliruan berpikir (logical fallacy), asumsi tanpa dasar, serta mengidentifikasi celah logika dalam teks input. Berikan evaluasi rasional dan usulan koreksi premis."},
+  visual:{label:'Deskripsi SVG yang diinginkan',defaultInput:"Buatlah kode SVG ringkas (tanpa pembungkus penjelasan ekstra) untuk elemen arsitektur jaringan AI terdistribusi berwarna biru tinta dan kuning stabilo.",systemInstruction:"Anda adalah modul 'Konstruksi Vektor Nalar AI'. Jika input meminta SVG, hasilkan kode SVG murni dengan warna biru tinta (#12203A) dan kuning stabilo (#F2E35B) yang modern dan bersih. Sertakan deskripsi singkat 1 kalimat."}
+};
+function setConsoleMode(mode){
+  currentMode=mode;
+  ['analisis','logika','visual'].forEach(m=>$('btn-'+m).classList.toggle('on',m===mode));
+  $('input-label').innerText=consolePrompts[mode].label;
+  $('console-input').value=consolePrompts[mode].defaultInput;
+}
+function setPreset(num){
+  $('console-input').value=num===1
+    ?"Bagaimana merancang strategi penetrasi pasar untuk produk teknologi kesehatan berbasis AI tanpa terkesan menggunakan jargon pasaran?"
+    :"Apakah kecerdasan buatan dapat memiliki kesadaran eksistensial, ataukah ia hanya simulasi statistik yang sangat halus?";
+}
+function setStatus(s,text){
+  const t=$('status-text'),d=$('status-dot');
+  t.innerText=text;t.dataset.s=s;d.dataset.s=s;
+}
+async function runNalarEngine(){
+  const inputVal=$('console-input').value.trim(),out=$('console-output'),runBtn=$('console-run-btn');
+  if(!inputVal)return;
+  runBtn.disabled=true;
+  setStatus('busy','Memproses...');
+  out.innerHTML=`<p class="empty">${SPIN}Nalar sedang menalar...</p>`;
+  const promptText=consolePrompts[currentMode].systemInstruction+'\n\nInput pengguna:\n'+inputVal;
+  const session='console-'+currentMode+'-'+Date.now();
+  try{
+    const result=await fetchGeminiWithBackoff(promptText,session);
+    const c=result.candidates?.[0];
+    if(c&&c.content?.parts?.[0]?.text){
+      const txt=c.content.parts[0].text;
+      out.innerHTML=currentMode==='visual'?renderSvgOrText(txt):formatMarkdownText(txt);
+      setStatus('ok','Selesai');
+    }else throw new Error('Respon kosong atau tidak valid dari API.');
+  }catch(err){
+    out.innerHTML=`<p style="color:var(--red)">Gagal memproses: ${escapeHtml(err.message)}. Periksa koneksi lalu jalankan lagi.</p>`;
+    setStatus('err','Gagal terhubung');
+  }finally{runBtn.disabled=false}
+}
+function escapeHtml(t){return t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}
+function inlineMarkdown(e){
+  return e.replace(/`([^`\n]+)`/g,'<code>$1</code>')
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/(^|[^*])\*(?!\s)([^*\n]+?)\*(?!\*)/g,'$1<em>$2</em>');
+}
+function formatMarkdownText(text){
+  const lines=String(text).replace(/\r/g,'').split('\n');
+  let html='',inCode=false,buf=[],lt=null;
+  const close=()=>{if(lt){html+=`</${lt}>`;lt=null}};
+  const pre=()=>`<pre><code>${escapeHtml(buf.join('\n'))}</code></pre>`;
+  for(const raw of lines){
+    if(raw.trim().startsWith('```')){
+      if(inCode){html+=pre();buf=[];inCode=false}else{close();inCode=true}
+      continue;
+    }
+    if(inCode){buf.push(raw);continue}
+    const line=escapeHtml(raw);let m;
+    if((m=line.match(/^\s*#{1,6}\s+(.*)$/))){close();html+=`<div style="margin-top:10px;font-weight:700">${inlineMarkdown(m[1])}</div>`}
+    else if((m=line.match(/^\s*[-*•]\s+(.*)$/))){if(lt!=='ul'){close();html+='<ul style="padding-left:20px">';lt='ul'}html+=`<li>${inlineMarkdown(m[1])}</li>`}
+    else if((m=line.match(/^\s*\d+[.)]\s+(.*)$/))){if(lt!=='ol'){close();html+='<ol style="padding-left:22px">';lt='ol'}html+=`<li>${inlineMarkdown(m[1])}</li>`}
+    else if(line.trim()===''){close();html+='<div style="height:6px"></div>'}
+    else{close();html+=`<div>${inlineMarkdown(line)}</div>`}
+  }
+  if(inCode)html+=pre();
+  close();
+  return html;
+}
+function renderSvgOrText(text){
+  const match=String(text).match(/<svg[\s\S]*?<\/svg>/i);
+  if(!match)return formatMarkdownText(text);
+  let svg=match[0].replace(/<script[\s\S]*?<\/script>/gi,'').replace(/<foreignObject[\s\S]*?<\/foreignObject>/gi,'').replace(/\son\w+\s*=\s*("[^"]*"|'[^']*')/gi,'');
+  if(!/xmlns=/.test(svg))svg=svg.replace(/<svg/i,'<svg xmlns="http://www.w3.org/2000/svg"');
+  const uri='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+  const desc=String(text).replace(/```(?:svg|xml|html)?[\s\S]*?```/gi,'').replace(match[0],'').trim();
+  return `<div class="svgbox"><img src="${uri}" alt="Hasil vektor SVG"></div>${desc?`<div style="margin-top:8px">${formatMarkdownText(desc)}</div>`:''}<details><summary>Lihat kode SVG</summary><pre><code>${escapeHtml(svg)}</code></pre></details>`;
+}
+window.onload=()=>{$('console-input').value=consolePrompts.analisis.defaultInput};
+</script>
 </body>
 </html>
